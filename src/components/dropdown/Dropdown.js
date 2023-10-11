@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import DropdownDisplay from './DropdownDisplay';
 import DropdownMenu from "./DropdownMenu";
-import "../../Dropdown.css";
+import "../../styles/Dropdown.css";
 
-function Dropdown({ label, multiSelect, selectedOptions, setSelectedOptions }) {
+function Dropdown({ label, optionData, multiSelect, selectedOptions, setSelectedOptions }) {
     const [isVisible, setVisibility] = useState("dropdown-visibility-false")
 
     const toggleSelected = (data) => {
-        const name = data["name"]
+        const text = data["text"]
         if (multiSelect === true) {
             let optionFound = false
             selectedOptions.forEach((obj) => {
-                if (obj["name"] === name) {
+                if (obj["text"] === text) {
                     optionFound = true
                 }
             })
             if (optionFound === true) {
-                setSelectedOptions(arr => arr.filter(option => option["name"] !== name));
+                setSelectedOptions(arr => arr.filter(option => option["text"] !== text));
             } else {
                 setSelectedOptions(arr => [...arr, data])
             }
@@ -24,7 +24,7 @@ function Dropdown({ label, multiSelect, selectedOptions, setSelectedOptions }) {
             if (selectedOptions.length === 1) {
                 let optionFound = false
                 selectedOptions.forEach((obj) => {
-                    if (obj["name"] === name) {
+                    if (obj["text"] === text) {
                         optionFound = true
                     }
                 })
@@ -51,7 +51,7 @@ function Dropdown({ label, multiSelect, selectedOptions, setSelectedOptions }) {
         <div className="dropdown">
             <label>{label}</label>
             <DropdownDisplay selectedOptions={selectedOptions} toggleVisibility={toggleVisibility} />
-            <DropdownMenu visibility={isVisible} toggleSelected={toggleSelected} selectedOptions={selectedOptions} />
+            <DropdownMenu optionData={optionData} visibility={isVisible} toggleSelected={toggleSelected} selectedOptions={selectedOptions} />
         </div>
     );
 }

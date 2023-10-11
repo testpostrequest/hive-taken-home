@@ -1,23 +1,51 @@
 import React, { useState } from 'react';
 import Dropdown from "./components/dropdown/Dropdown";
-import './App.css';
+import './styles/App.css';
 
 function App() {
-  const [selectedMultiOptions, setSelectedMultiOptions] = useState([])
-  const [selectedSingleOption, setSelectedSingleOption] = useState([])
-
+  // Hooks are created for each Dropdown menu.
+  // These hooks are used to store the selected options for each menu.
+  const [animalSelectedOptions, setAnimalSelectedOptions] = useState([])
+  const [numPetsSelectedOption, setNumPetsSelectedOption] = useState([])
 
   const getSelectedOptions = () => {
-    console.log("selectedMultiOptions:", selectedMultiOptions)
-    console.log("selectedSingleOption:", selectedSingleOption)
+    console.log("animalSelectedOptions:", animalSelectedOptions)
+    console.log("numPetsSelectedOption:", numPetsSelectedOption)
   }
 
+  const favoriteAnimalOptionData = [
+    { "text": "Dog", "value": "dog" },
+    { "text": "Cat", "value": "cat" },
+    { "text": "Fish", "value": "fish" },
+    { "text": "Mouse", "value": "mouse" },
+    { "text": "Turtle", "value": "turtle" },
+    { "text": "Lizard", "value": "lizard" },
+  ]
+
+  const numberOfPetsOptionData = [
+    { "text": "One", "value": 1 },
+    { "text": "Two", "value": 2 },
+    { "text": "Three or more", "value": 3 },
+  ]
+
   return (
-    <div className={"app"}>
+    <div className={"App"}>
       <h1> Multi Select </h1>
-      <Dropdown label={"numbers"} multiSelect={true} selectedOptions={selectedMultiOptions} setSelectedOptions={setSelectedMultiOptions} />
+      <Dropdown
+        label={"Favorite Animal"}
+        optionData={favoriteAnimalOptionData}
+        multiSelect={true}
+        selectedOptions={animalSelectedOptions}
+        setSelectedOptions={setAnimalSelectedOptions}
+      />
       <h1> Single Select </h1>
-      <Dropdown label={"number"} multiSelect={false} selectedOptions={selectedSingleOption} setSelectedOptions={setSelectedSingleOption} />
+      <Dropdown
+        label={"Number of Pets"}
+        optionData={numberOfPetsOptionData}
+        multiSelect={false}
+        selectedOptions={numPetsSelectedOption}
+        setSelectedOptions={setNumPetsSelectedOption}
+      />
       <h1>Log Selected Options To Console</h1>
       <button onClick={() => getSelectedOptions()}>Log Selected Options</button>
     </div>

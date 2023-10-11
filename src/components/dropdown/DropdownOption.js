@@ -1,11 +1,10 @@
 import React from 'react';
 
 function DropdownOption({ data, toggleSelected, selectedOptions }) {
-
     const generateClassNames = () => {
         const classes = ["dropdown-option", "dropdown-option:hover"]
         selectedOptions.forEach((obj) => {
-            if (obj["name"] === data["name"]) {
+            if (obj["text"] === data["text"]) {
                 classes.push("dropdown-option-selected")
                 return classes
             }
